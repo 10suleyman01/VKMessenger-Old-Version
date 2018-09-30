@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
+    <style name="AppTheme" parent="ArionTheme"/>
+
+	<style name="ArionTheme" parent="Theme.AppCompat.Light.NoActionBar">
+		<item name="colorPrimary">@color/primary</item>
+		<item name="colorPrimaryDark">@color/primary_dark</item>
+		<item name="colorAccent">@color/accent</item>
+	</style>
+
+	<style name="ArionEditTextTheme" parent="Theme.AppCompat.Light">
+		<item name="colorControlNormal">@color/white</item>
+		<item name="colorControlActivated">@color/white</item>
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+	<style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title"> 
+		<item name="android:textSize">16sp</item>
 	</style>
 </resources>

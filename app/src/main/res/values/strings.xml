@@ -2,6 +2,20 @@
 <resources>
 
     <string name="app_name">VKClient</string>
-    <string name="hello_world">Hello world!</string>
+	
+	<string name="email_or_number">Email или телефон</string>
+	<string name="password">Пароль</string>
+
+	<string name="friends">Друзья</string>
+	<string name="messages">Сообщения</string>
+	<string name="settings">Настройки</string>
+	<string name="not_connection">Нет подключения к сети</string>
+	<string name="invalid_login">"Неправильный логин или пароль!</string>
+
+	<string name="error">Ошибка</string>
+	<string name="loading">Загрузка...</string>
+
+	<string name="login">Войти</string>
+	<string name="logout">Выйти</string>
 
 </resources>

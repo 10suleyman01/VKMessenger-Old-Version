@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="wrap_content"
+	android:layout_width="match_parent"
+	android:clickable="true"
+	android:id="@+id/item_conversation"
+	android:background="?attr/selectableItemBackground">
+
+	<de.hdodenhof.circleimageview.CircleImageView
+		android:id="@+id/conversationPhoto"
+		android:layout_height="60dp"
+		android:layout_width="60dp"
+		android:layout_margin="8dp"/>
+
+	<RelativeLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:layout_toRightOf="@id/conversationPhoto"
+		android:layout_marginTop="8dp">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:id="@+id/conversationTitle"
+			android:textColor="@color/primary_text"
+			android:singleLine="true"
+			android:ellipsize="end"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:layout_below="@id/conversationTitle"
+			android:layout_marginTop="8dp"
+			android:orientation="horizontal">
+
+			<RelativeLayout
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent">
+
+				<TextView
+					android:id="@+id/conversationText"
+					android:textColor="@color/secondary_text"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:singleLine="true"
+					android:ellipsize="end"
+					android:maxEms="30"/>
+
+				<ImageView
+					android:layout_height="10dp"
+					android:layout_width="10dp"
+					android:id="@+id/conversationReadState"
+					android:layout_alignParentRight="true"
+					android:layout_marginRight="10dp"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:layout_alignParentRight="true"
+					android:layout_marginRight="8dp"
+					android:id="@+id/conversationUnreadCount"
+					android:gravity="center"/>
+
+			</RelativeLayout>
+
+		</LinearLayout>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/conversationDate"
+			android:textSize="12sp"
+			android:layout_marginBottom="6dp"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="6dp"/>
+
+	</RelativeLayout>
+
+</RelativeLayout>
+
