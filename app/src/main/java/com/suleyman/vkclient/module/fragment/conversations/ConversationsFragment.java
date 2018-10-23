@@ -65,7 +65,7 @@ public class ConversationsFragment extends BaseFragment<ConversationsView, Conve
 
 	private void initRecyclerView() {
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-		recyclerView.setHasFixedSize(true);	
+		recyclerView.setHasFixedSize(true);
 	}
 
 	@Override
@@ -98,39 +98,6 @@ public class ConversationsFragment extends BaseFragment<ConversationsView, Conve
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onTyping(final TypingEvent event) {
 		final ArrayList<ItemConversation> messages = adapter.getItems();
-		DisposableManager.add("set_typing_status", Observable.fromIterable(messages).
-			filter(new Predicate<ItemConversation>(){
-				@Override
-				public boolean test(ItemConversation conversation) throws Exception {
-					return conversation.getLastMessage().getPeerId() == event.getId();
-				}
-			}).subscribe(new Consumer<ItemConversation>(){
-				@Override
-				public void accept(final ItemConversation itemConversation) throws Exception {		
-					itemConversation.getLastMessage().setIsAttachment(true);
-					itemConversation.getLastMessage().setText("печатает...");
-					adapter.setConversation(event.getId(), messages, null);
-				}
-			}, new Consumer<Throwable>(){
-				@Override
-				public void accept(Throwable error) throws Exception {
-					error.printStackTrace();
-				}
-			}, new Action(){
-				@Override
-				public void run() throws Exception {
-					Observable.fromIterable(messages).
-						delay(2, TimeUnit.SECONDS, Schedulers.io()).
-						subscribe(new Consumer<ItemConversation>(){
-							@Override
-							public void accept(ItemConversation itemConversation) throws Exception {
-								adapter.setConversation(event.getId(), messages, null);
-								DisposableManager.dispose("set_typing_status");
-							}					
-						});
-				}		
-			}));
-
 	}
 
 	@Override
