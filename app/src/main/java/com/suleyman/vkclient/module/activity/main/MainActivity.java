@@ -116,7 +116,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 				case R.id.friends: addFragment(FriendsFragment.newInstance(), FRIENDS_TAG); break;
 				case R.id.messages: addFragment(ConversationsFragment.newInstance(), CONVERSASTIONS_TAG); break;
 				case R.id.profile: addFragment(ProfileFragment.newInstance(), PROFILE_TAG); break;
-		}
+		} // test git
 
 		return true;
 	}
@@ -138,7 +138,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 	@Override
 	public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
 		super.onMultiWindowModeChanged(isInMultiWindowMode);
-		
+
 		bottomNavigationView.setSelectedItemId(bottomNavigationView.getSelectedItemId());
 	}
 
