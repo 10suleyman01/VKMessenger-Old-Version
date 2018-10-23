@@ -6,7 +6,6 @@ import com.suleyman.vkclient.api.object.conversations.attachment.ConversationAtt
 import java.util.ArrayList;
 
 public class ForwardConversation {
-	
 
 	@SerializedName("date")
 	@Expose
@@ -36,7 +35,7 @@ public class ForwardConversation {
 		this.fwdMessages = fwdMessages;
 	}
 
-	public ArrayList<ForwardConversation> getFwdMessages() {
+	public ArrayList<ForwardConversation> getFwdConversations() {
 		return fwdMessages;
 	}
 

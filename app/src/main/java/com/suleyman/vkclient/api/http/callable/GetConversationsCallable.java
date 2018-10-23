@@ -13,7 +13,7 @@ public class GetConversationsCallable implements Callable<ObjectConversations> {
 	private VKRequest request;
 
 	public GetConversationsCallable() {
-		this.request = VKRequest.set("messages.getConversations", "filter=all", "count=100", "extended=1" , "fields=photo_200_orig,online,sex");
+		this.request = VKRequest.set("messages.getConversations", "filter=all", "count=200", "extended=1" , "fields=photo_200_orig,online,sex");
 	}
 
 	@Override
@@ -29,23 +29,27 @@ public class GetConversationsCallable implements Callable<ObjectConversations> {
 			ArrayList<GroupConversation> groups = response.getGroups();
 
 			Map<Long,ProfileConversation> mapProfiles = new HashMap<>();
-			for (ProfileConversation profile : profiles) {
-				mapProfiles.put(profile.getId(), profile);
+			if (profiles != null) {
+				for (ProfileConversation profile : profiles) {
+					mapProfiles.put(profile.getId(), profile);
+				}
 			}
 
 			Map<Long, GroupConversation> mapGroups = new HashMap<>();
-			for (GroupConversation group: groups) {
-				mapGroups.put(group.getId(), group);
+			if (groups != null) {
+				for (GroupConversation group: groups) {
+					mapGroups.put(group.getId(), group);
+				}
 			}
 
+			if (items != null)
 			for (ItemConversation item : items) {					
 				SubItemConversation subItem = item.getConversation();
 				SubItemConversation.Peer peer = subItem.getPeer();
 				switch (peer.type) {
 					case "chat": {
 
-							ConversationLastMessage lastMessage = item.getLastMessage();						
-
+							ConversationLastMessage lastMessage = item.getLastMessage();
 							ConversationLastMessage.Action action = lastMessage.getAction();
 
 							if (action != null) {
@@ -70,15 +74,13 @@ public class GetConversationsCallable implements Callable<ObjectConversations> {
 									case "chat_title_update": {
 											profile = mapProfiles.get(lastMessage.getFromId());
 											int sex = profile.getSex();
-											String changed = sex == 1 ? "изменила" : "изменил";
+											String changed = sex == 1 ? "поменяла" : "поменял";
 											lastMessage.setText(String.format("%s %s", profile.getTitle(), changed + " название беседы на " + action.text));
 											item.setLastMessage(lastMessage);
 										} break;
 								}
 
 							}
-
-
 							ChatSettings chatSettings = subItem.getChatSettings();
 							item.setTitle(chatSettings.getTitle());
 							ChatSettings.Photo photo = chatSettings.getPhoto();

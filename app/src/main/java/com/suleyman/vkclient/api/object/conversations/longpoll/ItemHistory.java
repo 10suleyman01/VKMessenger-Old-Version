@@ -30,5 +30,4 @@ public class ItemHistory {
 	public ArrayList<ConversationLastMessage> getItems() {
 		return items;
 	}
-	
 }

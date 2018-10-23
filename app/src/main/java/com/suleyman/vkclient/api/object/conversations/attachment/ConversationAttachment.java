@@ -4,27 +4,34 @@ import com.google.gson.annotations.*;
 
 public class ConversationAttachment {
 	
+	public static final String PHOTO = "photo";
+	public static final String WALL = "wall";
+	public static final String STICKER = "sticker";
+	public static final String DOC = "doc";
+	public static final String AUDIO_MESSAGE = "audio_message";
+	
+	
 	@SerializedName("type")
 	@Expose
 	private String type;
 
-	@SerializedName("photo")
+	@SerializedName(PHOTO)
 	@Expose
 	private AttachmentPhoto photo;
 
-	@SerializedName("wall")
+	@SerializedName(WALL)
 	@Expose
 	private AttachmentWall wall;
 
-	@SerializedName("sticker")
+	@SerializedName(STICKER)
 	@Expose
 	private AttachmentSticker sticker;
 
-	@SerializedName("doc")
+	@SerializedName(DOC)
 	@Expose
 	private AttachmentDocument document;
 
-	@SerializedName("audio_message")
+	@SerializedName(AUDIO_MESSAGE)
 	@Expose
 	private AttachmentAudioMessage audioMessage;
 

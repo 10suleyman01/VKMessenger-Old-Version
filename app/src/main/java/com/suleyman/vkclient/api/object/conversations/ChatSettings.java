@@ -23,6 +23,18 @@ public class ChatSettings {
 	@SerializedName("active_ids")
 	@Expose
 	private long[] activeIds;
+	
+	@SerializedName("is_group_channel")
+	@Expose
+	private boolean isGroupChannel;
+
+	public void setIsGroupChannel(boolean isGroupChannel) {
+		this.isGroupChannel = isGroupChannel;
+	}
+
+	public boolean isGroupChannel() {
+		return isGroupChannel;
+	}
 
 	public void setTitle(String title) {
 		this.title = title;

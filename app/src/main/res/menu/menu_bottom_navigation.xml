@@ -9,6 +9,10 @@
         android:id="@+id/messages"
 		android:icon="@drawable/baseline_email_black_36"
         android:title="@string/messages"/>
+	<item
+        android:id="@+id/profile"
+		android:icon="@drawable/baseline_account_circle_white_36"
+        android:title="@string/profile"/>
 
 	<item
         android:id="@+id/settings"

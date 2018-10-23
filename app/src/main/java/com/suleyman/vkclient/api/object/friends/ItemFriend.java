@@ -2,8 +2,8 @@ package com.suleyman.vkclient.api.object.friends;
 
 import com.google.gson.annotations.*;
 
-	public class ItemFriend {
-	
+public class ItemFriend {
+
 	@SerializedName("id")
 	@Expose
 	private long id;

@@ -2,11 +2,10 @@ package com.suleyman.vkclient.api.object.conversationHistory;
 
 import com.google.gson.annotations.*;
 import com.suleyman.vkclient.api.object.conversations.*;
-
-import java.util.ArrayList;
+import java.util.*;
 
 public class ResponseConversationHistory {
-	
+
 	@SerializedName("count")
 	@Expose
 	private int count;
@@ -17,7 +16,7 @@ public class ResponseConversationHistory {
 
 	@SerializedName("items")
 	@Expose
-	private ArrayList<ConversationLastMessage> lastMessage;
+	private ArrayList<ConversationLastMessage> lastMessages;
 
 	public void setCount(int count) {
 		this.count = count;
@@ -35,11 +34,11 @@ public class ResponseConversationHistory {
 		return conversation;
 	}
 
-	public void setLastMessage(ArrayList<ConversationLastMessage> lastMessage) {
-		this.lastMessage = lastMessage;
+	public void setLastMessage(ArrayList<ConversationLastMessage> lastMessages) {
+		this.lastMessages = lastMessages;
 	}
 
-	public ArrayList<ConversationLastMessage> getLastMessage() {
-		return lastMessage;
+	public ArrayList<ConversationLastMessage> getLastMessages() {
+		return lastMessages;
 	}
 }

@@ -4,17 +4,17 @@ import android.view.*;
 
 import com.suleyman.vkclient.R;
 import com.suleyman.vkclient.api.object.conversations.ItemConversation;
+import com.suleyman.vkclient.app.VKApp;
 import com.suleyman.vkclient.module.base.adapter.BaseAdapter;
 import java.util.ArrayList;
-import com.suleyman.vkclient.app.VKApp;
 
 public class ConversationsAdapter extends BaseAdapter<ItemConversation, ConversationHolder> {
-	
-	private ArrayList<ItemConversation> conversations;
+
+	private ArrayList<ItemConversation> items;
 
 	public ConversationsAdapter(ArrayList<ItemConversation> conversations) {
 		super(conversations);
-		this.conversations = conversations;
+		this.items = conversations;
 	}
 
 	@Override
@@ -24,16 +24,34 @@ public class ConversationsAdapter extends BaseAdapter<ItemConversation, Conversa
 
 	@Override
 	public void onBind(ConversationHolder holder, int pos) {
-		
-		ItemConversation conversation = conversations.get(pos);
-		
-		holder.setTitle(conversation.getTitle());
-		holder.setText(conversation.getLastMessage().getText(), conversation.getLastMessage().isAttachment());
-		holder.setOnline(conversation.isOnline());
-		holder.setPhoto(conversation.getPhoto());
-		holder.setDate(VKApp.getTimeFormat(conversation.getLastMessage().getDate()));
-		holder.setReadState(conversation.getLastMessage().isOut(), conversation.getConversation().isOutMessageRead(), conversation.getConversation().getUnreadCount());
-		
-	}
 
+		ItemConversation conversation = items.get(pos);
+
+		holder.setTitle(conversation.getTitle());
+		holder.setBodyPhoto(conversation.getBodyPhoto(), conversation.getLastMessage().isOut() || conversation.getConversation().isChat());
+		holder.setText(conversation.getLastMessage().getBody(), conversation.getLastMessage().isAttachment());
+		holder.setOnline(conversation.isOnline());
+		holder.setPhoto(conversation.getPhoto(), conversation.isChat() && conversation.getConversation().getChatSettings().getState().equals("left"));
+		holder.setDate(VKApp.getTimeFormat(conversation.getLastMessage().getDate()));
+
+		holder.setReadState(conversation.getLastMessage().isOut(), 
+							conversation.getConversation().isOutMessageRead(),
+							conversation.getConversation().getUnreadCount(), 
+							conversation.isChat() || conversation.isGroup()
+							);
+
+	}
+	
+	public void setConversation(long peerId, ArrayList<ItemConversation> items, ItemConversation newItem) {
+		for (int i = 0; i < items.size(); i++) {
+			ItemConversation item = items.get(i);
+			if (item.getLastMessage().getPeerId() == peerId) {
+				if (newItem != null) {
+					item = newItem;
+				} 
+				items.set(i, item);
+				notifyItemChanged(i, item);
+			}
+		}
+	}
 }

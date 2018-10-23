@@ -7,6 +7,6 @@ public interface ConversationsView extends MvpView {
 	
 	void showLoading(boolean loading);
 	void setConversations(ObjectConversations objectConversations);
-	void showError(String message);
+	void showError(Throwable error);
 	
 }

@@ -2,8 +2,10 @@ package com.suleyman.vkclient.module.base;
 
 import com.hannesdorfmann.mosby3.mvp.*;
 
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import com.suleyman.vkclient.module.broadcast.NetworkStateChangeReceiver;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -11,8 +13,8 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpBasePresenter
 	
 	@ViewInject(R.id.toolbar)
 	private Toolbar toolbar;
-
-	protected Toolbar getToolbar() {
+	
+	protected Toolbar getToolbar() {	
 		return toolbar;
 	}
 
@@ -33,6 +35,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpBasePresenter
 
 	private void initToolbar() {
 		if (toolbar != null) {
+			
 			setSupportActionBar(toolbar);
 		}
 	}

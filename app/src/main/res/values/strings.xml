@@ -8,13 +8,26 @@
 
 	<string name="friends">Друзья</string>
 	<string name="messages">Сообщения</string>
+	<string name="profile">Профиль</string>
 	<string name="settings">Настройки</string>
 	<string name="not_connection">Нет подключения к сети</string>
 	<string name="invalid_login">"Неправильный логин или пароль!</string>
 
+	<string name="delete">Удалить</string>
+	
 	<string name="error">Ошибка</string>
+	<string name="typing">печатает...</string>
 	<string name="loading">Загрузка...</string>
-
+	<string name="updating">Обновление...</string>
+	<string name="connecting">Подключение...</string>
+	<string name="wait_connecting">Ожидания подключения...</string>
+	
+	<string name="show_attachments">Показать вложения</string>
+	<string name="delete_history_conversation">Удалить историю</string>
+	<string name="off_notifications">Выключить уведомления</string>
+	<string name="on_notifications">Включить уведомления</string>
+	
+	<string name="type_message">Ваше сообщение</string>
 	<string name="login">Войти</string>
 	<string name="logout">Выйти</string>
 

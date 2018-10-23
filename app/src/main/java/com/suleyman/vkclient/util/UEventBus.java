@@ -1,7 +1,5 @@
 package com.suleyman.vkclient.util;
 
-import android.util.*;
-import com.squareup.otto.*;
 import org.greenrobot.eventbus.EventBus;
 
 public class UEventBus {

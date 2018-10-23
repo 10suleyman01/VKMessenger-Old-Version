@@ -3,11 +3,17 @@
 	<color name="primary">#37598B</color>
 	<color name="primary_dark">#224477</color>
 	<color name="primary_light">#C5CAE9</color>
+	<color name="primary_black">#100E0E</color>
+	<color name="primary_black_darkness">#010000</color>
+	<color name="bg_conversation_out">#D4E5F6</color>
+	<color name="bg_icon">#ABC9E8</color>
 	<color name="accent">#2C4870</color>
 	<color name="primary_text">#212121</color>
 	<color name="secondary_text">#757575</color>
 	<color name="white">#FFFFFF</color>
 	<color name="hint_color">#EFEFEF</color>
+	<color name="gray_color">#818181</color>
+	<color name="bg_conversations">#ECF1F5</color>
 	<color name="divider">#BDBDBD</color>
 	<color name="black">#000000</color>
 	<color name="online">#00AB6F</color>

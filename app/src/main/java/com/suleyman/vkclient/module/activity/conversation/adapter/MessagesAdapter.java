@@ -2,6 +2,7 @@ package com.suleyman.vkclient.module.activity.conversation.adapter;
 
 import android.view.*;
 
+import android.support.v7.app.AppCompatActivity;
 import com.suleyman.vkclient.R;
 import com.suleyman.vkclient.api.object.conversations.ConversationLastMessage;
 import com.suleyman.vkclient.module.activity.conversation.adapter.MessageHolder;
@@ -9,26 +10,26 @@ import com.suleyman.vkclient.module.base.adapter.BaseAdapter;
 import java.util.ArrayList;
 
 public class MessagesAdapter extends BaseAdapter<ConversationLastMessage, MessageHolder> {
-	
-	private ArrayList<ConversationLastMessage> messages;
 
-	private static final int MESSAGE_OUT = 1;
-	private static final int MESSAGE_IN = 2;
+	private static final int MESSAGE_OUT = 2;
+	private static final int MESSAGE_IN = 4;
 
-	public MessagesAdapter(ArrayList<ConversationLastMessage> messages) {
+	public AppCompatActivity activity;
+	public ArrayList<ConversationLastMessage> messages;
+
+	public MessagesAdapter(AppCompatActivity activity, ArrayList<ConversationLastMessage> messages) {
 		super(messages);
 		this.messages = messages;
+		this.activity = activity;
 	}
 
 	@Override
 	public MessageHolder onCreateHolder(ViewGroup parent, int viewType) {
-		View view = null;
-		if (viewType == MESSAGE_OUT) {
-			view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_out, parent, false);
-		} else {
-			view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_in, parent, false);
+		switch (viewType) {
+			case MESSAGE_OUT: return new MessageHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.conversation_out, parent, false));
+			case MESSAGE_IN: return new MessageHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.conversation_in, parent, false));
 		}
-		return new MessageHolder(view);
+		return null;
 	}
 
 	@Override
@@ -41,15 +42,29 @@ public class MessagesAdapter extends BaseAdapter<ConversationLastMessage, Messag
 		}
 	}
 
+	public void addMessage(ConversationLastMessage message) {
+		messages.add(0, message);
+		notifyItemInserted(0);
+	}
+
+	public void deleteMessage(long id) {
+		for (int i = 0; i < messages.size();  i++) {
+			ConversationLastMessage message = messages.get(i);
+			if (message.getId() == id) {
+				messages.remove(i);
+				notifyItemRemoved(i);
+			}
+		}
+	}
+
 	@Override
 	public void onBind(MessageHolder holder, int pos) {
 		ConversationLastMessage message = messages.get(pos);
-		
-		holder.setup(holder.itemView.getContext(), message);
-		
 		holder.clear();
-		
+		holder.setup(activity, message, holder.itemView.getContext());
 		holder.addMessages();
+		holder.addAttachments();
+		holder.addForwards();
 	}
 
 }

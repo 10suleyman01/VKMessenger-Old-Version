@@ -1,39 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_height="match_parent"
-	android:layout_width="match_parent"
-	android:orientation="vertical">
+	android:layout_width="match_parent">
 
 	<include
-		layout="@layout/toolbar"/>
+		layout="@layout/toolbar"
+		android:id="@+id/activityconversationinclude1"/>
 
-	<FrameLayout
+	<ProgressBar
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:indeterminate="true"
+		android:layout_centerInParent="true"
+		android:id="@+id/loadingConversations"/>
+
+	<LinearLayout
+		android:layout_height="48dp"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:id="@+id/inputLayout"
+		android:background="@color/white"
+		android:layout_alignParentBottom="true"
+		android:gravity="center">
 
-		<ProgressBar
-			android:layout_gravity="center"
-			android:id="@+id/loadingMessages"
-			android:layout_height="wrap_content"
-			android:layout_width="wrap_content"/>
-
-		<android.support.v7.widget.RecyclerView
-			android:id="@+id/recyclerViewMessages"
-			android:background="#ECF1F5"
-			android:layout_height="match_parent"
-			android:layout_width="match_parent"
-			android:layout_marginBottom="46dp"/>
+		<ImageView
+			android:layout_height="36dp"
+			android:layout_width="36dp"
+			android:src="@drawable/round_attach_file_white_48"
+			android:id="@+id/btnAttachment"
+			android:padding="2dp"
+			android:background="@color/white"/>
 
 		<EditText
-			android:layout_height="46dp"
-			android:layout_width="match_parent"
+			android:inputType="textMultiLine"
 			android:background="@color/white"
-			android:ems="10"
-			android:hint="Ваше сообщение"
-			android:layout_gravity="bottom"/>
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:hint="@string/type_message"
+			android:id="@+id/typeMessage"
+			android:layout_weight="1.0"
+			android:paddingLeft="4dp"/>
 
-	</FrameLayout>
+		<ImageView
+			android:layout_height="36dp"
+			android:layout_width="36dp"
+			android:src="@drawable/outline_mic_none_white_36"
+			android:id="@+id/btnSend"
+			android:padding="2dp"
+			android:background="@color/white"/>
+		
+	
+	</LinearLayout>
+	
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:visibility="gone"
+		android:background="#BDBDBD"
+		android:layout_above="@id/inputLayout"/>
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:background="@color/white"
+		android:id="@+id/attachmentlayout"
+		android:visibility="gone"
+		android:layout_above="@id/divider"/>
 
-</LinearLayout>
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/recyclerViewConversations"
+		android:background="@color/bg_conversations"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_above="@id/attachmentlayout"
+		android:layout_below="@id/activityconversationinclude1"/>
+
+</RelativeLayout>
 

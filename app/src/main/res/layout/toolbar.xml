@@ -13,10 +13,13 @@
 		android:background="@color/primary"
 		app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 		app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-		android:contentInsetStart="4dp" 
-		android:contentInsetLeft="0dp" 
 		app:contentInsetLeft="0dp"
-		app:contentInsetStart="4dp"/>
+		app:contentInsetRight="0dp"
+		app:contentInsetStart="0dp"
+		android:contentInsetLeft="0dp"
+		android:contentInsetRight="0dp"
+		android:contentInsetStart="0dp"
+		app:contentInsetStartWithNavigation="0dp"/>
 
 </android.support.design.widget.AppBarLayout>
 

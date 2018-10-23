@@ -7,77 +7,95 @@
 	android:id="@+id/item_conversation"
 	android:background="?attr/selectableItemBackground">
 
-	<de.hdodenhof.circleimageview.CircleImageView
-		android:id="@+id/conversationPhoto"
-		android:layout_height="66dp"
-		android:layout_width="66dp"
-		android:layout_margin="8dp"/>
-
 	<RelativeLayout
 		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
-		android:layout_toRightOf="@id/conversationPhoto"
-		android:layout_marginTop="8dp">
+		android:id="@+id/item_conversationRelativeLayout">
 
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:id="@+id/conversationTitle"
-			android:textColor="@color/primary_text"
-			android:singleLine="true"
-			android:ellipsize="end"/>
+		<de.hdodenhof.circleimageview.CircleImageView
+			android:id="@+id/conversationPhoto"
+			android:layout_height="70dp"
+			android:layout_width="70dp"
+			android:layout_margin="8dp"/>
 
-		<LinearLayout
+		<RelativeLayout
 			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:layout_below="@id/conversationTitle"
-			android:layout_marginTop="4dp"
-			android:orientation="horizontal">
+			android:layout_toRightOf="@id/conversationPhoto"
+			android:layout_marginTop="8dp"
+			android:id="@+id/itemconversationRelativeLayout1">
 
-			<RelativeLayout
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:id="@+id/conversationTitle"
+				android:textColor="@color/primary_text"
+				android:singleLine="true"
+				android:ellipsize="end"/>
+
+			<LinearLayout
 				android:layout_height="wrap_content"
 				android:layout_width="match_parent"
-				android:layout_marginTop="8dp">
+				android:layout_below="@id/conversationTitle"
+				android:layout_marginTop="4dp"
+				android:orientation="horizontal">
 
-				<TextView
-					android:id="@+id/conversationText"
-					android:textColor="@color/secondary_text"
-					android:layout_width="wrap_content"
+				<RelativeLayout
 					android:layout_height="wrap_content"
-					android:textAppearance="?android:attr/textAppearanceSmall"
-					android:singleLine="true"
-					android:ellipsize="end"
-					android:maxEms="30"/>
+					android:layout_width="match_parent"
+					android:layout_marginTop="8dp">
 
-				<ImageView
-					android:layout_height="10dp"
-					android:layout_width="10dp"
-					android:id="@+id/conversationReadState"
-					android:layout_alignParentRight="true"
-					android:layout_marginRight="10dp"/>
+					<de.hdodenhof.circleimageview.CircleImageView
+						android:id="@+id/conversationBodyPhoto"
+						android:layout_height="30dp"
+						android:layout_width="30dp"
+						android:layout_marginRight="8dp"/>
 
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:textAppearance="?android:attr/textAppearanceSmall"
-					android:layout_alignParentRight="true"
-					android:layout_marginRight="8dp"
-					android:id="@+id/conversationUnreadCount"
-					android:gravity="center"/>
+					<TextView
+						android:id="@+id/conversationText"
+						android:textColor="@color/secondary_text"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textAppearance="?android:attr/textAppearanceSmall"
+						android:singleLine="true"
+						android:ellipsize="end"
+						android:maxEms="30"
+						android:layout_toRightOf="@id/conversationBodyPhoto"
+						android:layout_centerVertical="true"/>
+					
+					<ImageView
+						android:layout_height="8dp"
+						android:layout_width="8dp"
+						android:id="@+id/conversationReadState"
+						android:layout_alignParentRight="true"
+						android:layout_marginRight="10dp"
+						android:layout_centerVertical="true"/>
 
-			</RelativeLayout>
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textAppearance="?android:attr/textAppearanceSmall"
+						android:layout_alignParentRight="true"
+						android:layout_marginRight="8dp"
+						android:id="@+id/conversationUnreadCount"
+						android:gravity="center"
+						android:layout_centerVertical="true"/>
 
-		</LinearLayout>
+				</RelativeLayout>
 
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:id="@+id/conversationDate"
-			android:textSize="12sp"
-			android:layout_marginBottom="6dp"
-			android:layout_alignParentRight="true"
-			android:layout_marginRight="6dp"/>
+			</LinearLayout>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/conversationDate"
+				android:textSize="12sp"
+				android:layout_marginBottom="6dp"
+				android:layout_alignParentRight="true"
+				android:layout_marginRight="6dp"/>
+
+		</RelativeLayout>
 
 	</RelativeLayout>
 

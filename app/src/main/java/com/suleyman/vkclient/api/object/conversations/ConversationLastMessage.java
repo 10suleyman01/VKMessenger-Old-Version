@@ -2,11 +2,17 @@ package com.suleyman.vkclient.api.object.conversations;
 
 import com.google.gson.annotations.*;
 
+import com.suleyman.vkclient.api.http.callable.GetUserCallable;
 import com.suleyman.vkclient.api.object.conversations.attachment.ConversationAttachment;
+import com.suleyman.vkclient.api.object.user.ObjectUser;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 
 public class ConversationLastMessage {
-	
+
 	@SerializedName("date")
 	@Expose
 	private long date;
@@ -59,7 +65,48 @@ public class ConversationLastMessage {
 	@Expose
 	private Action action;
 
-	private boolean isAttachment = false;
+	private String bodyPhoto;
+
+	private boolean isAttachment;
+
+	public void setBodyPhoto(String bodyPhoto) {
+		this.bodyPhoto = bodyPhoto;
+	}
+
+	public String getBodyPhoto() {
+		return bodyPhoto;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public boolean hasPhotos() {
+		for (ConversationAttachment attachment : getAttachments()) {
+			if (attachment.getType().equals("photo")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void setBodyPhoto(long userId) {
+		if (!isOut()) {
+			Observable.fromCallable(new GetUserCallable(userId)).
+				subscribeOn(Schedulers.io()).
+				observeOn(AndroidSchedulers.mainThread()).
+				subscribe(new Consumer<ObjectUser>(){
+					@Override
+					public void accept(ObjectUser user) throws Exception {
+						setBodyPhoto(user.getResponse().get(0).getPhoto());
+					}
+				});
+		}
+	}
 
 	public void setAction(Action action) {
 		this.action = action;
@@ -81,7 +128,7 @@ public class ConversationLastMessage {
 		this.fwdConversation = fwdConversation;
 	}
 
-	public ArrayList<ForwardConversation> getFwdConversation() {
+	public ArrayList<ForwardConversation> getFwdConversations() {
 		return fwdConversation;
 	}
 
@@ -133,14 +180,6 @@ public class ConversationLastMessage {
 		return fromId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public long getId() {
-		return id;
-	}
-
 	public void setOut(int out) {
 		this.out = out;
 	}
@@ -165,7 +204,7 @@ public class ConversationLastMessage {
 		this.text = text;
 	}
 
-	public String getText() {
+	public String getBody() {
 		if (attachments != null && attachments.size() > 0) {
 			setIsAttachment(true);
 			for (ConversationAttachment attachment : attachments) {
@@ -195,6 +234,10 @@ public class ConversationLastMessage {
 		return text;
 	}
 
+	public String getText() {
+		return text;
+	}
+
 	public class Action {
 
 		@SerializedName("type")
@@ -221,6 +264,6 @@ public class ConversationLastMessage {
 
 	@Override
 	public String toString() {
-		return getText() + " " + isAttachment;
+		return getBody() + " " + isAttachment;
 	}
 }

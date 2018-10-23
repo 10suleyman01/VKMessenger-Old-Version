@@ -102,6 +102,6 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 		super.onDestroy();
 
 		/** Dispose login task */
-		DisposableManager.dispose();
+		DisposableManager.dispose("login");
 	}
 }

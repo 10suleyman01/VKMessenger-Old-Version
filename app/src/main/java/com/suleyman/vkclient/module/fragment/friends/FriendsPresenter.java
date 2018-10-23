@@ -13,33 +13,37 @@ import io.reactivex.schedulers.Schedulers;
 public class FriendsPresenter extends MvpBasePresenter<FriendsView> {
 
 	public void loadFriends() {
-		DisposableManager.add(
-			Flowable.fromCallable(new GetFriendsCallable()).
-			subscribeOn(Schedulers.io()).
-			observeOn(AndroidSchedulers.mainThread()).
-			subscribe(new Consumer<ObjectFriends>(){
-					@Override
-					public void accept(ObjectFriends objectFriends) throws Exception {
-						if (!isViewAttached()) return;
-						getView().showLoading(true);
-						getView().setFriends(objectFriends);
-					}
-				}, new Consumer<Throwable>(){
-					@Override
-					public void accept(Throwable error) throws Exception {
-						if (!isViewAttached()) return;
-						getView().showLoading(false);
-						getView().showError(error.getMessage());
-					}
-				}, new Action(){
-					@Override
-					public void run() throws Exception {
-						if (!isViewAttached()) return;
-						getView().showLoading(false);
-					}
-				})
+		DisposableManager.add("get_friends",
+							  Flowable.fromCallable(new GetFriendsCallable()).
+							  subscribeOn(Schedulers.io()).
+							  observeOn(AndroidSchedulers.mainThread()).
+							  subscribe(new Consumer<ObjectFriends>(){
+									  @Override
+									  public void accept(ObjectFriends objectFriends) throws Exception {
+										  if (!isViewAttached()) return;
+										  getView().showLoading(true);
+										  getView().setFriends(objectFriends);
+									  }
+								  }, new Consumer<Throwable>(){
+									  @Override
+									  public void accept(Throwable error) throws Exception {
+										  if (!isViewAttached()) return;
+										  getView().showLoading(false);
+										  getView().showError(error);
+									  }
+								  }, new Action(){
+									  @Override
+									  public void run() throws Exception {
+										  if (!isViewAttached()) return;
+										  getView().showLoading(false);
+									  }
+								  })
 
-		);
+							  );
 
+	}
+	
+	public void dispose() {
+		DisposableManager.dispose("get_friends");
 	}
 }

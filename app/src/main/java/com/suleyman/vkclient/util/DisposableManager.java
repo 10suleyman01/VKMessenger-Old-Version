@@ -1,25 +1,26 @@
 package com.suleyman.vkclient.util;
 
-import io.reactivex.disposables.*;
+import java.util.*;
+
+import io.reactivex.disposables.Disposable;
 
 public class DisposableManager {
 	
-	private static CompositeDisposable compositeDisposable;
-
-	public static void add(Disposable disposable) {
-		getCompositeDisposable().add(disposable);
+	private static Map<String, Disposable> mapDisposables;
+	
+	static {
+		mapDisposables = new HashMap<>();
+	}
+	
+	public static void add(String key, Disposable disposable) {
+		mapDisposables.put(key, disposable);
 	}
 
-	public static void dispose() {
-		getCompositeDisposable().dispose();
-	}
-
-	private static CompositeDisposable getCompositeDisposable() {
-		if (compositeDisposable == null || compositeDisposable.isDisposed()) {
-			compositeDisposable = new CompositeDisposable();
+	public static void dispose(String key) {
+		if (mapDisposables.containsKey(key)) {
+			mapDisposables.get(key).dispose();
 		}
-		return compositeDisposable;
 	}
-
+	
 	private DisposableManager() {}
 }

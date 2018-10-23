@@ -7,16 +7,24 @@ import java.util.ArrayList;
 
 public abstract class BaseAdapter<T, VH extends BaseAdapter.BaseViewHolder> extends RecyclerView.Adapter<VH> {
 
+	private VH holder;
+	
 	private ArrayList<T> items;
 	protected ItemOnClickListener<T> itemOnClickListener;
+	protected ItemOnLongClickListener<T> itemOnLongClickListener;
 
 	public BaseAdapter(ArrayList<T> items) {
 		this.items = items;
 	}
+	
+	public VH getHolder() {
+		return holder;
+	}
 
 	@Override
 	public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-		return onCreateHolder(parent, viewType);
+		VH holder = this.holder = onCreateHolder(parent, viewType);
+		return holder;
 	}
 
 	@Override
@@ -25,10 +33,18 @@ public abstract class BaseAdapter<T, VH extends BaseAdapter.BaseViewHolder> exte
 
 		if (itemOnClickListener != null) {
 			holder.itemView.setOnClickListener(new View.OnClickListener(){
-
 					@Override
 					public void onClick(View view) {
 						itemOnClickListener.onClick(items.get(position), position);
+					}
+				});
+		}
+
+		if (itemOnLongClickListener != null) {
+			holder.itemView.setOnLongClickListener(new View.OnLongClickListener(){
+					@Override
+					public boolean onLongClick(View view) {
+						return itemOnLongClickListener.onLongClick(items.get(position), position);
 					}
 				});
 		}
@@ -55,9 +71,21 @@ public abstract class BaseAdapter<T, VH extends BaseAdapter.BaseViewHolder> exte
 		}
 	}
 
-	public void setItem(int i, T item, boolean isMoveToTop) {
-		items.set(i, item);
-		notifyItemChanged(i, item);
+	public void setItem(int pos, T item, boolean isMoveToTop) {
+		if (pos == 0) {
+			items.set(0, item);
+			notifyItemChanged(0, item);
+		} else {
+			if (isMoveToTop) {
+				items.remove(pos);
+				items.add(0, item);
+				notifyItemMoved(pos, 0);
+				notifyItemChanged(0);
+			} else {
+				items.set(pos, item);
+				notifyItemChanged(pos, item);
+			}
+		}
 	}
 
 	public void setItems(ArrayList<T> items) {
@@ -76,6 +104,14 @@ public abstract class BaseAdapter<T, VH extends BaseAdapter.BaseViewHolder> exte
 		return itemOnClickListener;
 	}
 
+	public void setItemOnLongClickListener(ItemOnLongClickListener<T> itemOnLongClickListener) {
+		this.itemOnLongClickListener = itemOnLongClickListener;
+	}
+
+	public ItemOnLongClickListener<T> getItemOnLongClickListener() {
+		return itemOnLongClickListener;
+	}
+
 	public void addMoreItems(ArrayList<T> newItems) {
 		int oldSize = items.size();
 		items.addAll(newItems);
@@ -89,6 +125,10 @@ public abstract class BaseAdapter<T, VH extends BaseAdapter.BaseViewHolder> exte
 
 	public interface ItemOnClickListener<T> {
 		void onClick(T item, int pos);
+	}
+
+	public interface ItemOnLongClickListener<T> {
+		boolean onLongClick(T item, int pos);
 	}
 
 	public abstract VH onCreateHolder(ViewGroup parent, int viewType);

@@ -3,7 +3,7 @@ package com.suleyman.vkclient.api.object.conversations;
 import com.google.gson.annotations.*;
 
 public class ItemConversation {
-	
+
 	@SerializedName("conversation")
 	@Expose
 	private SubItemConversation conversation;
@@ -51,7 +51,15 @@ public class ItemConversation {
 	public String getTitle() {
 		return title;
 	}
-
+	
+	public boolean isChat() {
+		return conversation.getPeer().type.equals("chat");
+	}
+	
+	public boolean isGroup() {
+		return conversation.getPeer().type.equals("group");
+	}
+	
 	public void setConversation(SubItemConversation conversation) {
 		this.conversation = conversation;
 	}

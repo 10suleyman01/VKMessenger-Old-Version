@@ -2,6 +2,9 @@ package com.suleyman.vkclient.api.object.conversations;
 
 import com.google.gson.annotations.*;
 
+import android.os.Parcelable;
+import android.os.Parcel;
+
 public class SubItemConversation {
 	
 	@SerializedName("peer")
@@ -31,7 +34,9 @@ public class SubItemConversation {
 	@SerializedName("chat_settings")
 	@Expose
 	private ChatSettings chatSettings;
-
+	
+	private boolean isChat;
+	
 	public void setInRead(long inRead) {
 		this.inRead = inRead;
 	}
@@ -52,6 +57,10 @@ public class SubItemConversation {
 		return outRead == lastMessageId;
 	}
 	
+	public boolean isOutMessageRead(long lastMessageId) {
+		return outRead == lastMessageId;
+	}
+	
 	public boolean isInMessageRead() {
 		return inRead == lastMessageId;
 	}
@@ -62,6 +71,11 @@ public class SubItemConversation {
 
 	public int getUnreadCount() {
 		return unreadCount;
+	}
+	
+	public boolean isChat() {
+		isChat = chatSettings != null;
+		return isChat;
 	}
 
 	public void setLastMessageId(long lastMessageId) {

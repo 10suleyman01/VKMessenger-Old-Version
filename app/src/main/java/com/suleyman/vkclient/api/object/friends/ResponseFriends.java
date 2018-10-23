@@ -4,12 +4,15 @@ import com.google.gson.annotations.*;
 import java.util.*;
 
 import com.suleyman.vkclient.api.object.friends.ItemFriend;
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 
 public class ResponseFriends {
-	
+
 	@SerializedName("count")
 	@Expose
 	private long count;
+	
 	@SerializedName("items")
 	@Expose
 	private ArrayList<ItemFriend> items;

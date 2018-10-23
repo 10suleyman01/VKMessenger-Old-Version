@@ -7,5 +7,5 @@ public interface FriendsView extends MvpView {
 	
 	void showLoading(boolean loading);
 	void setFriends(ObjectFriends objectFriends);
-	void showError(String message);
+	void showError(Throwable error);
 }

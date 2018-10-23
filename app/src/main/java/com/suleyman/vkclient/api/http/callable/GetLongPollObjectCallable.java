@@ -1,9 +1,9 @@
 package com.suleyman.vkclient.api.http.callable;
 
+import com.suleyman.vkclient.api.http.*;
+
 import com.suleyman.vkclient.api.object.longPollServer.ObjectLongPollServer;
 import java.util.concurrent.Callable;
-import com.suleyman.vkclient.api.http.VKRequest;
-import com.suleyman.vkclient.api.http.VKRestClient;
 
 public class GetLongPollObjectCallable implements Callable<ObjectLongPollServer> {
 	

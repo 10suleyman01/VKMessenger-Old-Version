@@ -3,7 +3,6 @@ package com.suleyman.vkclient.api.object.conversations;
 import com.google.gson.annotations.*;
 
 public class GroupConversation {
-	
 
 	@SerializedName("id")
 	@Expose
