@@ -13,7 +13,6 @@ public class ObservableProvider {
 			subscribeOn(Schedulers.io()).
 			observeOn(AndroidSchedulers.mainThread());
 	}
-	
 
 	public static <T> Flowable<T> flowableFromCallable(Callable<T> callable) {
 		return Flowable.fromCallable(callable).
